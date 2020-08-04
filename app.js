@@ -23,12 +23,7 @@ const articleSchema = {
     content: String,
 };
 
-const article = mongoose.model("Article", articleSchema);
-
-
-
-
-
+const Article = mongoose.model("Article", articleSchema);
 
 
 // server listen ============================================================
