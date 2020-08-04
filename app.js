@@ -21,7 +21,7 @@ mongoose.connect("mongodb://localhost:27017/wikiDB", {useNewUrlParser: true, use
 const articlesSchema = {
     title: String,
     content: String,
-}
+};
 
 const article = mongoose.model("Article", articlesSchema);
 
@@ -34,5 +34,5 @@ const article = mongoose.model("Article", articlesSchema);
 // server listen ============================================================
 
 app.listen(3000, function(){
-    console.log("Server is up and running on port 3000")
-})
+    console.log("Server is up and running on port 3000");
+});
