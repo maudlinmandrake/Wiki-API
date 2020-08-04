@@ -18,12 +18,12 @@ mongoose.connect("mongodb://localhost:27017/wikiDB", {useNewUrlParser: true, use
 
 // database setup ======================================================
 
-const articlesSchema = {
+const articleSchema = {
     title: String,
     content: String,
 };
 
-const article = mongoose.model("Article", articlesSchema);
+const article = mongoose.model("Article", articleSchema);
 
 
 
