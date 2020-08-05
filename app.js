@@ -87,9 +87,35 @@ app.route("/articles/:articleTitle")
             function(err){
                 if(!err){
                     res.send("Successfully updated article!");
+                } else {
+                    res.send(err);
                 }
             }
         );
+    })
+
+    .patch(function(req, res){
+        Article.findOneAndUpdate(
+            {title: req.params.articleTitle},
+            {$set: req.body},
+            function(err){
+                if (!err){
+                    res.send("Successfully updated article!");
+                } else {
+                    res.send(err);
+                }
+            }
+        );
+    })
+
+    .delete(function(req, res){
+        Article.findOneAndDelete({title: req.params.articleTitle}, function(err){
+            if (!err) {
+                res.send("Successfully deleted article");
+            } else {
+                res.send(err);
+            }
+        });
     });
 
 // server listen ============================================================
