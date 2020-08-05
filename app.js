@@ -72,9 +72,9 @@ app.route("/articles/:articleTitle").
     get(function(req, res){
         Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
             if (!err) {
-                res.send(foundArticle)
+                res.send(foundArticle);
             } else {
-                console.log(err);
+                console.log("No article with matching title found!");
             }
         });
     });
