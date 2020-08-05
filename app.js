@@ -70,13 +70,15 @@ app.route("/articles")
 
 app.route("/articles/:articleTitle")
     .get(function(req, res){
-        Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
-            if (!err) {
-                res.send(foundArticle);
-            } else {
-                console.log("No article with matching title found!");
-            }
-        });
+        Article.findOne(
+            {title: req.params.articleTitle}, 
+            function(err, foundArticle){
+                if (!err) {
+                    res.send(foundArticle);
+                } else {
+                    console.log("No article with matching title found!");
+                }
+            });
     })
 
     .put(function(req, res){
@@ -90,8 +92,7 @@ app.route("/articles/:articleTitle")
                 } else {
                     res.send(err);
                 }
-            }
-        );
+            });
     })
 
     .patch(function(req, res){
@@ -104,18 +105,19 @@ app.route("/articles/:articleTitle")
                 } else {
                     res.send(err);
                 }
-            }
-        );
+            });
     })
 
     .delete(function(req, res){
-        Article.findOneAndDelete({title: req.params.articleTitle}, function(err){
-            if (!err) {
-                res.send("Successfully deleted article");
-            } else {
-                res.send(err);
-            }
-        });
+        Article.findOneAndDelete(
+            {title: req.params.articleTitle},
+            function(err){
+                if (!err) {
+                    res.send("Successfully deleted article");
+                } else {
+                    res.send(err);
+                }
+            });
     });
 
 // server listen ============================================================
