@@ -25,9 +25,12 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema);
 
+
+// requests targeting all articles ======================================
+
 app.route("/articles")
     .get(
-        function(req, res){
+        function(req, res) {
             Article.find({}, function(err, foundArticles){
                 if (!err) {
                     res.send(foundArticles);
@@ -36,8 +39,9 @@ app.route("/articles")
                 }
             });
         })
+
     .post(
-        function(req, res){
+        function(req, res) {
             const newArticle = new Article({
                 title: req.body.title,
                 content: req.body.content
@@ -51,12 +55,26 @@ app.route("/articles")
                 }
             });
         })
-    .delete(function(req, res){
+
+    .delete(function(req, res) {
         Article.deleteMany(function(err){
             if (!err){
                 res.send("Successfully deleted all articles");
             } else {
                 res.send(err);
+            }
+        });
+    });
+
+// requests targeting specific articles ======================================
+
+app.route("/articles/:articleTitle").
+    get(function(req, res){
+        Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
+            if (!err) {
+                res.send(foundArticle)
+            } else {
+                console.log(err);
             }
         });
     });
