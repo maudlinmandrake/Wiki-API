@@ -68,8 +68,8 @@ app.route("/articles")
 
 // requests targeting specific articles ======================================
 
-app.route("/articles/:articleTitle").
-    get(function(req, res){
+app.route("/articles/:articleTitle")
+    .get(function(req, res){
         Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
             if (!err) {
                 res.send(foundArticle);
@@ -77,6 +77,19 @@ app.route("/articles/:articleTitle").
                 console.log("No article with matching title found!");
             }
         });
+    })
+
+    .put(function(req, res){
+        Article.findOneAndUpdate(
+            {title: req.params.articleTitle},
+            {title: req.body.title, content: req.body.content},
+            {overwrite: true},
+            function(err){
+                if(!err){
+                    res.send("Successfully updated article!");
+                }
+            }
+        );
     });
 
 // server listen ============================================================
